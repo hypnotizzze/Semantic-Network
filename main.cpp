@@ -32,7 +32,7 @@ bool operator== (const for_search& a, const for_search& b) {
 
 typedef struct {
 	string name_of_link, _to;
-	int type_link; // тип связи
+	int type_link; // С‚РёРї СЃРІСЏР·Рё
 } Link;
 
 bool operator== (const Link &a, const Link &b) {
@@ -48,17 +48,17 @@ void add_node(Sem_set *s) {
 	int count;
 	string name_of_node;
 	set<string>::iterator it;
-	cout << "Введите имя добавляемой вершины: ";
+	cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РґРѕР±Р°РІР»СЏРµРјРѕР№ РІРµСЂС€РёРЅС‹: ";
 	cin.get();
 	getline(cin, name_of_node);
 	count = s->nodes.count(name_of_node);
 	if (count > 0) {
-		cout << "Данная вершина уже добавлена в семантическую сеть\n\n";
+		cout << "Р”Р°РЅРЅР°СЏ РІРµСЂС€РёРЅР° СѓР¶Рµ РґРѕР±Р°РІР»РµРЅР° РІ СЃРµРјР°РЅС‚РёС‡РµСЃРєСѓСЋ СЃРµС‚СЊ\n\n";
 	}
 	else {
 		s->nodes.emplace(name_of_node);
 		it = s->nodes.find(name_of_node);
-		cout << "Вершина: " << *it << " добавлена в сеть\n\n";
+		cout << "Р’РµСЂС€РёРЅР°: " << *it << " РґРѕР±Р°РІР»РµРЅР° РІ СЃРµС‚СЊ\n\n";
 	}
 }
 
@@ -66,38 +66,38 @@ void delete_node(Sem_set *s) {
 	int count;
 	string name_of_node;
 	cin.get();
-	cout << "Введите имя удаляемой вершины: ";
+	cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ СѓРґР°Р»СЏРµРјРѕР№ РІРµСЂС€РёРЅС‹: ";
 	getline(cin, name_of_node);
 	count = s->nodes.count(name_of_node);
 	if (count == 0) {
-		cout << "Данная вершина не найдена в семантической сети\n\n";
+		cout << "Р”Р°РЅРЅР°СЏ РІРµСЂС€РёРЅР° РЅРµ РЅР°Р№РґРµРЅР° РІ СЃРµРјР°РЅС‚РёС‡РµСЃРєРѕР№ СЃРµС‚Рё\n\n";
 	}
 	else if (count == 1) {
 		s->nodes.erase(name_of_node);
 		if (s->nodes_with_links.count(name_of_node) == 1) {
 			s->nodes_with_links.erase(name_of_node);
 		}
-		cout << "Вершина: " << name_of_node << " удалена из сети\n\n";
+		cout << "Р’РµСЂС€РёРЅР°: " << name_of_node << " СѓРґР°Р»РµРЅР° РёР· СЃРµС‚Рё\n\n";
 	}
 }
 
 void edit_node(Sem_set* s) {
 	int count;
 	string name_of_node, name_2;
-	cout << "Введите имя вершины для редактирования: ";
+	cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РІРµСЂС€РёРЅС‹ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ: ";
 	cin.get();
 	getline(cin, name_of_node);
 	count = s->nodes.count(name_of_node);
 	if (count == 0) {
-		cout << "Данная вершина не найдена в семантической сети\n\n";
+		cout << "Р”Р°РЅРЅР°СЏ РІРµСЂС€РёРЅР° РЅРµ РЅР°Р№РґРµРЅР° РІ СЃРµРјР°РЅС‚РёС‡РµСЃРєРѕР№ СЃРµС‚Рё\n\n";
 	}
 	else if (count == 1) {
 		do {
-			cout << "Введите новое имя вершины: ";
+			cout << "Р’РІРµРґРёС‚Рµ РЅРѕРІРѕРµ РёРјСЏ РІРµСЂС€РёРЅС‹: ";
 			getline(cin, name_2);
 			count = s->nodes.count(name_2);
 			if (count == 1) {
-				cout << "Вершина" << name_2 << " уже присутствует в сети, повторите ввод\n";
+				cout << "Р’РµСЂС€РёРЅР°" << name_2 << " СѓР¶Рµ РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚ РІ СЃРµС‚Рё, РїРѕРІС‚РѕСЂРёС‚Рµ РІРІРѕРґ\n";
 			}
 		} while (count == 1);
 		auto tmp = s->nodes.find(name_of_node);
@@ -113,28 +113,28 @@ void edit_node(Sem_set* s) {
 			s->nodes_with_links.erase(tmp_2);
 			s->nodes_with_links.emplace(name_2, value);
 		}
-		cout << "Вершина: " << name_of_node << " изменена на " << name_2 << "\n\n";
+		cout << "Р’РµСЂС€РёРЅР°: " << name_of_node << " РёР·РјРµРЅРµРЅР° РЅР° " << name_2 << "\n\n";
 	}
 }
 
 void enter_link_data(string &str, int &type) {
 	bool end = false;
-	cout << "Введите имя связи: ";
+	cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ СЃРІСЏР·Рё: ";
 	getline(cin, str);
 	do {
-		cout << "Типы связей:\n";
-		cout << "1) Gen - генеративная,  Sit - ситуативная, Neg - негативная\n";
-		cout << "2) Ins - инструментальная\n";
-		cout << "3) Com - коммитативная,  Cor - коррелятивная\n";
-		cout << "4) Fin - финитивная,  Caus - каузальная, Pot - потенсивная\n";
-		cout << "Введите тип связи (Gen - 1, Sit - 2, Neg - 3, Ins - 4, Com - 5, Cor - 6, Fin - 7, Caus - 8, Pot - 9: ";
+		cout << "РўРёРїС‹ СЃРІСЏР·РµР№:\n";
+		cout << "1) Gen - РіРµРЅРµСЂР°С‚РёРІРЅР°СЏ,  Sit - СЃРёС‚СѓР°С‚РёРІРЅР°СЏ, Neg - РЅРµРіР°С‚РёРІРЅР°СЏ\n";
+		cout << "2) Ins - РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°Р»СЊРЅР°СЏ\n";
+		cout << "3) Com - РєРѕРјРјРёС‚Р°С‚РёРІРЅР°СЏ,  Cor - РєРѕСЂСЂРµР»СЏС‚РёРІРЅР°СЏ\n";
+		cout << "4) Fin - С„РёРЅРёС‚РёРІРЅР°СЏ,  Caus - РєР°СѓР·Р°Р»СЊРЅР°СЏ, Pot - РїРѕС‚РµРЅСЃРёРІРЅР°СЏ\n";
+		cout << "Р’РІРµРґРёС‚Рµ С‚РёРї СЃРІСЏР·Рё (Gen - 1, Sit - 2, Neg - 3, Ins - 4, Com - 5, Cor - 6, Fin - 7, Caus - 8, Pot - 9: ";
 		cin >> type;
 		cout << "\n";
 		if (type > 0 && type < 10) {
 			end = true;
 		}
 		else
-			cout << "Введен неверный тип связи\n";
+			cout << "Р’РІРµРґРµРЅ РЅРµРІРµСЂРЅС‹Р№ С‚РёРї СЃРІСЏР·Рё\n";
 	} while (end == false);
 }
 
@@ -210,19 +210,19 @@ void add_link(Sem_set *s) {
 	cin.get();
 	if (s->nodes.size() >= 2) {
 		do {
-			cout << "Введите имя вершины 1: ";
+			cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РІРµСЂС€РёРЅС‹ 1: ";
 			getline(cin, name_1);
 			count = s->nodes.count(name_1);
 			if (count == 0) {
-				cout << "Данная вершина не найдена в семантической сети, повторите попытку\n";
+				cout << "Р”Р°РЅРЅР°СЏ РІРµСЂС€РёРЅР° РЅРµ РЅР°Р№РґРµРЅР° РІ СЃРµРјР°РЅС‚РёС‡РµСЃРєРѕР№ СЃРµС‚Рё, РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ\n";
 			}
 		} while (count == 0);
 		do {
-			cout << "Введите имя вершины 2: ";
+			cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РІРµСЂС€РёРЅС‹ 2: ";
 			getline(cin, name_2);
 			count = s->nodes.count(name_2);
 			if (count == 0) {
-				cout << "Данная вершина не найдена в семантической сети, повторите попытку\n";
+				cout << "Р”Р°РЅРЅР°СЏ РІРµСЂС€РёРЅР° РЅРµ РЅР°Р№РґРµРЅР° РІ СЃРµРјР°РЅС‚РёС‡РµСЃРєРѕР№ СЃРµС‚Рё, РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ\n";
 			}
 		} while (count == 0);
 		
@@ -230,7 +230,7 @@ void add_link(Sem_set *s) {
 			enter_link_data(name_3, type);
 			link_flag = check_add(*s, name_1, name_2, type);
 			if (link_flag == true)
-				cout << "Связь типа " << show_name_link(type) << " невозможно добавить, повторите попытку\n\n";
+				cout << "РЎРІСЏР·СЊ С‚РёРїР° " << show_name_link(type) << " РЅРµРІРѕР·РјРѕР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ, РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ\n\n";
 		} while (link_flag == true);
 
 		cin.get();
@@ -238,10 +238,10 @@ void add_link(Sem_set *s) {
 		link.name_of_link = name_3;
 		link._to = name_2;
 		link.type_link = type;
-		s->nodes_with_links.emplace(piecewise_construct, make_tuple(name_1), make_tuple()); // добавление связи +
+		s->nodes_with_links.emplace(piecewise_construct, make_tuple(name_1), make_tuple()); // РґРѕР±Р°РІР»РµРЅРёРµ СЃРІСЏР·Рё +
 		s->nodes_with_links[name_1].push_back(link);
 
-		s->nodes_with_links.emplace(piecewise_construct, make_tuple(name_2), make_tuple()); // нужна ли связь с отр. значением?
+		s->nodes_with_links.emplace(piecewise_construct, make_tuple(name_2), make_tuple()); // РЅСѓР¶РЅР° Р»Рё СЃРІСЏР·СЊ СЃ РѕС‚СЂ. Р·РЅР°С‡РµРЅРёРµРј?
 		if(link.type_link != Neg && link.type_link != Cor)
 			link.type_link = -type;
 		link._to = name_1;
@@ -249,7 +249,7 @@ void add_link(Sem_set *s) {
 
 	}
 	else {
-		cout << "Недостаточно элементов, чтобы добавить связь\n\n";
+		cout << "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ СЌР»РµРјРµРЅС‚РѕРІ, С‡С‚РѕР±С‹ РґРѕР±Р°РІРёС‚СЊ СЃРІСЏР·СЊ\n\n";
 	}
 }
 
@@ -260,16 +260,16 @@ void delete_link(Sem_set *s) {
 	Link link, link_mem;
 	if (s->nodes_with_links.size() > 0) {
 		do {
-			cout << "Введите у какой вершины удалить связь: ";
+			cout << "Р’РІРµРґРёС‚Рµ Сѓ РєР°РєРѕР№ РІРµСЂС€РёРЅС‹ СѓРґР°Р»РёС‚СЊ СЃРІСЏР·СЊ: ";
 			cin >> name_1;
 			count = s->nodes_with_links.count(name_1);
 			if (count == 0)
-				cout << "Вершина с таким именем не найдена, пвоторите ввод\n";
+				cout << "Р’РµСЂС€РёРЅР° СЃ С‚Р°РєРёРј РёРјРµРЅРµРј РЅРµ РЅР°Р№РґРµРЅР°, РїРІРѕС‚РѕСЂРёС‚Рµ РІРІРѕРґ\n";
 		} while (count == 0);
 		auto it = s->nodes.find(name_1);
 		cin.get();
 		do {
-			cout << "Введите имя связи для удаления: ";
+			cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ СЃРІСЏР·Рё РґР»СЏ СѓРґР°Р»РµРЅРёСЏ: ";
 			cin >> name_2;
 			for (auto iter = s->nodes_with_links[*it].begin(); iter != s->nodes_with_links[*it].end(); ++iter) {
 				link = *iter;
@@ -284,14 +284,14 @@ void delete_link(Sem_set *s) {
 			cin.get();
 			auto edit = s->nodes_with_links[*it].begin();
 			if (find_link == false)
-				cout << "Связь не найдена, повторите попытку\n";
+				cout << "РЎРІСЏР·СЊ РЅРµ РЅР°Р№РґРµРЅР°, РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ\n";
 			else { 
-				if (i > 1) { // больше одной связи
+				if (i > 1) { // Р±РѕР»СЊС€Рµ РѕРґРЅРѕР№ СЃРІСЏР·Рё
 					do {
-						cout << "Введите номер связи для удаления: ";
+						cout << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ СЃРІСЏР·Рё РґР»СЏ СѓРґР°Р»РµРЅРёСЏ: ";
 						cin >> count;
 						if (count <= 0 || count > i)
-							cout << "Введено неверное значение, повторите попытку\n";
+							cout << "Р’РІРµРґРµРЅРѕ РЅРµРІРµСЂРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ, РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ\n";
 					} while (count <= 0 || count > i);
 				}
 				i = 1;
@@ -326,7 +326,7 @@ void delete_link(Sem_set *s) {
 		} while (find_link == false);
 	}
 	else
-		cout << "В сети нет связей\n\n";
+		cout << "Р’ СЃРµС‚Рё РЅРµС‚ СЃРІСЏР·РµР№\n\n";
 }
 
 void edit_link(Sem_set *s) {
@@ -336,16 +336,16 @@ void edit_link(Sem_set *s) {
 	Link link, link_for1, link_for2, link_mem;
 	if (s->nodes_with_links.size() > 0) {
 		do {
-			cout << "Введите у какой вершины изменить связь: ";
+			cout << "Р’РІРµРґРёС‚Рµ Сѓ РєР°РєРѕР№ РІРµСЂС€РёРЅС‹ РёР·РјРµРЅРёС‚СЊ СЃРІСЏР·СЊ: ";
 			cin >> name_1;
 			count = s->nodes_with_links.count(name_1);
 			if (count == 0)
-				cout << "Вершина с таким именем не найдена, пвоторите ввод\n";
+				cout << "Р’РµСЂС€РёРЅР° СЃ С‚Р°РєРёРј РёРјРµРЅРµРј РЅРµ РЅР°Р№РґРµРЅР°, РїРІРѕС‚РѕСЂРёС‚Рµ РІРІРѕРґ\n";
 		} while (count == 0);
 		auto it = s->nodes.find(name_1);
 		cin.get();
 		do {
-			cout << "Введите имя связи для изменения: ";
+			cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ СЃРІСЏР·Рё РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ: ";
 			cin >> name_2;
 			for (auto iter = s->nodes_with_links[*it].begin(); iter != s->nodes_with_links[*it].end(); ++iter) {
 				link = *iter;
@@ -360,16 +360,16 @@ void edit_link(Sem_set *s) {
 			cin.get();
 			auto edit = s->nodes_with_links[*it].begin();
 			if (find_link == false)
-				cout << "Связь не найдена, повторите попытку\n";
-			else if (i > 1) { // больше одной связи
+				cout << "РЎРІСЏР·СЊ РЅРµ РЅР°Р№РґРµРЅР°, РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ\n";
+			else if (i > 1) { // Р±РѕР»СЊС€Рµ РѕРґРЅРѕР№ СЃРІСЏР·Рё
 				do {
-					cout << "Введите номер связи для изменения: ";
+					cout << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ СЃРІСЏР·Рё РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ: ";
 					cin >> count;
 					if (count <= 0 || count > i)
-						cout << "Введено неверное значение, повторите попытку\n";
+						cout << "Р’РІРµРґРµРЅРѕ РЅРµРІРµСЂРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ, РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ\n";
 				} while (count <= 0 || count > i);
 
-				// ввод новых значений связи
+				// РІРІРѕРґ РЅРѕРІС‹С… Р·РЅР°С‡РµРЅРёР№ СЃРІСЏР·Рё
 				cin.get();
 				enter_link_data(link_for1.name_of_link, link_for1.type_link);
 				link_for2.name_of_link = link_for1.name_of_link;
@@ -405,7 +405,7 @@ void edit_link(Sem_set *s) {
 				s->nodes_with_links.emplace(piecewise_construct, make_tuple(link_for1._to), make_tuple());
 				s->nodes_with_links[link_for1._to].push_back(link_for2);
 			}
-			else { // найдена только одна вершина
+			else { // РЅР°Р№РґРµРЅР° С‚РѕР»СЊРєРѕ РѕРґРЅР° РІРµСЂС€РёРЅР°
 				enter_link_data(link_for1.name_of_link, link_for1.type_link);
 				link_for2.name_of_link = link_for1.name_of_link;
 				link_for2.type_link = -link_for1.type_link;
@@ -438,7 +438,7 @@ void edit_link(Sem_set *s) {
 		} while (find_link == false);
 	}
 	else
-		cout << "В сети нет связей\n\n";
+		cout << "Р’ СЃРµС‚Рё РЅРµС‚ СЃРІСЏР·РµР№\n\n";
 }
 
 void show_sem_set(Sem_set s) {
@@ -448,7 +448,7 @@ void show_sem_set(Sem_set s) {
 		for (auto it = s.nodes.begin(); it != s.nodes.end(); ++it)
 		{
 			if(s.nodes_with_links.count(*it) == 0)
-			  cout << "Вершина без связи: " << *it << "\n";
+			  cout << "Р’РµСЂС€РёРЅР° Р±РµР· СЃРІСЏР·Рё: " << *it << "\n";
 			else {
 				for (auto iter = s.nodes_with_links[*it].begin(); iter != s.nodes_with_links[*it].end(); ++iter) {
 					link = *iter;
@@ -462,14 +462,14 @@ void show_sem_set(Sem_set s) {
 		cout << "\n";
 	}
 	else
-		cout << "Сеть не содержит данных\n\n";
+		cout << "РЎРµС‚СЊ РЅРµ СЃРѕРґРµСЂР¶РёС‚ РґР°РЅРЅС‹С…\n\n";
 }
 
 void save_file(Sem_set s) {
 	ofstream file;
 	string filename;
 	Link link;
-	cout << "Введите имя файла для сохранения: ";
+	cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ: ";
 	cin >> filename;
 	file.open(filename, fstream::out);
 	file << s.nodes.size() << "\n";
@@ -491,7 +491,7 @@ void open_file(Sem_set *s) {
 	ifstream file;
 	string filename, name_node;
 	Link link;
-	cout << "Введите имя файла для сохранения: ";
+	cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ: ";
 	cin >> filename;
 	file.open(filename, fstream::in);
 	if (file) {
@@ -521,7 +521,7 @@ void open_file(Sem_set *s) {
 	}
 	else {
 		file.close();
-		cout << "Файл не найден\n\n";
+		cout << "Р¤Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅ\n\n";
 	}
 }
 
@@ -583,37 +583,37 @@ void search(Sem_set s) {
 
 	cin.get();
 	do {
-		cout << "Введите имя вершины, в которой начинается путь: ";
+		cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РІРµСЂС€РёРЅС‹, РІ РєРѕС‚РѕСЂРѕР№ РЅР°С‡РёРЅР°РµС‚СЃСЏ РїСѓС‚СЊ: ";
 		getline(cin, ver1);
 		if (s.nodes.count(ver1) == 0)
-			cout << "Данная вершина не найдена в сети\n";
+			cout << "Р”Р°РЅРЅР°СЏ РІРµСЂС€РёРЅР° РЅРµ РЅР°Р№РґРµРЅР° РІ СЃРµС‚Рё\n";
 	} while (s.nodes.count(ver1) == 0);
 	dist1 = distance(s.nodes.begin(), s.nodes.find(ver1));
 
 	do {
-		cout << "Введите имя вершины, в которой заканчивается путь: ";
+		cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РІРµСЂС€РёРЅС‹, РІ РєРѕС‚РѕСЂРѕР№ Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РїСѓС‚СЊ: ";
 		getline(cin, ver2);
 		if (s.nodes.count(ver2) == 0)
-			cout << "Данная вершина не найдена в сети\n";
+			cout << "Р”Р°РЅРЅР°СЏ РІРµСЂС€РёРЅР° РЅРµ РЅР°Р№РґРµРЅР° РІ СЃРµС‚Рё\n";
 		if (ver1 == ver2)
-			cout << "Данная вершина является началом пути, повторите ввод\n";
+			cout << "Р”Р°РЅРЅР°СЏ РІРµСЂС€РёРЅР° СЏРІР»СЏРµС‚СЃСЏ РЅР°С‡Р°Р»РѕРј РїСѓС‚Рё, РїРѕРІС‚РѕСЂРёС‚Рµ РІРІРѕРґ\n";
 	} while (s.nodes.count(ver2) == 0 || ver1 == ver2);
 	dist2 = distance(s.nodes.begin(), s.nodes.find(ver2));
 
 	do {
-		cout << "1) Поиск с учетом типа связи\n";
-		cout << "2) Потенсивные связи\n";
-		cout << "Введите вид поиска: ";
+		cout << "1) РџРѕРёСЃРє СЃ СѓС‡РµС‚РѕРј С‚РёРїР° СЃРІСЏР·Рё\n";
+		cout << "2) РџРѕС‚РµРЅСЃРёРІРЅС‹Рµ СЃРІСЏР·Рё\n";
+		cout << "Р’РІРµРґРёС‚Рµ РІРёРґ РїРѕРёСЃРєР°: ";
 		cin >> search_type;
 		if (search_type <= 0 || search_type > 2)
-			cout << "Введен неверный тип связи, повторите попытку\n";
+			cout << "Р’РІРµРґРµРЅ РЅРµРІРµСЂРЅС‹Р№ С‚РёРї СЃРІСЏР·Рё, РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ\n";
 	} while (search_type <=0 || search_type > 2);
 	cin.get();
 
 	if (s.nodes_with_links.count(ver1) == 0)
-		cout << "Из вершины '" << ver1 << "' нет пути\n";
+		cout << "РР· РІРµСЂС€РёРЅС‹ '" << ver1 << "' РЅРµС‚ РїСѓС‚Рё\n";
 	if (s.nodes_with_links.count(ver2) == 0)
-		cout << "В вершину '" << ver2 << "' нет путей\n";
+		cout << "Р’ РІРµСЂС€РёРЅСѓ '" << ver2 << "' РЅРµС‚ РїСѓС‚РµР№\n";
 	else {
 		cout << "\n";
 		cur = dist1;
@@ -629,7 +629,7 @@ void search(Sem_set s) {
 			finded = false;
 		//	show_path(path, ver1, s);
 		//	cout << "total=" << total << ", possible=" << possible <<"\n";
-			if ((possible > total) && cur != dist2) { // если есть путь и не конец
+			if ((possible > total) && cur != dist2) { // РµСЃР»Рё РµСЃС‚СЊ РїСѓС‚СЊ Рё РЅРµ РєРѕРЅРµС†
 			  find_count = 0;
 			  int tmp = 0, tmp2 = matr[cur].size();
 				do {
@@ -658,7 +658,7 @@ void search(Sem_set s) {
 				}
 			}
 
-			if(finded == false) { // или нет пути, или конец, или начало
+			if(finded == false) { // РёР»Рё РЅРµС‚ РїСѓС‚Рё, РёР»Рё РєРѕРЅРµС†, РёР»Рё РЅР°С‡Р°Р»Рѕ
 				int counter = 0;
 				for (auto it = path.begin(); it != path.end(); ++it) {
 					for_search z = *it;
@@ -670,7 +670,7 @@ void search(Sem_set s) {
 				iter--;
 
 				new_ver = true;
-				if (cur == dist1 && path.size() == 0) { // если в начале без новых путей
+				if (cur == dist1 && path.size() == 0) { // РµСЃР»Рё РІ РЅР°С‡Р°Р»Рµ Р±РµР· РЅРѕРІС‹С… РїСѓС‚РµР№
 					end = true;
 				}
 				else if (cur == dist2) {
@@ -720,18 +720,18 @@ int main() {
 	int cmd;
 	setlocale(LC_ALL, "Ru");
 	do {
-		cout << "1) Добавление вершины в сеть\n";
-		cout << "2) Удаление вершины из сети\n";
-		cout << "3) Редактирование вершины в сети\n";
-		cout << "4) Добавление связи в сеть\n";
-		cout << "5) Удаление связи из сети\n";
-		cout << "6) Редактирование связи в сети\n";
-		cout << "7) Просмотреть содержимое сети\n";
-		cout << "8) Сохранить содержимое сети\n";
-		cout << "9) Открыть файл с сетью\n";
-		cout << "10) Поиск связности понятий\n";
-		cout << "11) Выход\n";
-		cout << "Введите номер команды: ";
+		cout << "1) Р”РѕР±Р°РІР»РµРЅРёРµ РІРµСЂС€РёРЅС‹ РІ СЃРµС‚СЊ\n";
+		cout << "2) РЈРґР°Р»РµРЅРёРµ РІРµСЂС€РёРЅС‹ РёР· СЃРµС‚Рё\n";
+		cout << "3) Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РІРµСЂС€РёРЅС‹ РІ СЃРµС‚Рё\n";
+		cout << "4) Р”РѕР±Р°РІР»РµРЅРёРµ СЃРІСЏР·Рё РІ СЃРµС‚СЊ\n";
+		cout << "5) РЈРґР°Р»РµРЅРёРµ СЃРІСЏР·Рё РёР· СЃРµС‚Рё\n";
+		cout << "6) Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЃРІСЏР·Рё РІ СЃРµС‚Рё\n";
+		cout << "7) РџСЂРѕСЃРјРѕС‚СЂРµС‚СЊ СЃРѕРґРµСЂР¶РёРјРѕРµ СЃРµС‚Рё\n";
+		cout << "8) РЎРѕС…СЂР°РЅРёС‚СЊ СЃРѕРґРµСЂР¶РёРјРѕРµ СЃРµС‚Рё\n";
+		cout << "9) РћС‚РєСЂС‹С‚СЊ С„Р°Р№Р» СЃ СЃРµС‚СЊСЋ\n";
+		cout << "10) РџРѕРёСЃРє СЃРІСЏР·РЅРѕСЃС‚Рё РїРѕРЅСЏС‚РёР№\n";
+		cout << "11) Р’С‹С…РѕРґ\n";
+		cout << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РєРѕРјР°РЅРґС‹: ";
 		cin >> cmd;
 		cout << "\n";
 		switch (cmd) {
@@ -780,7 +780,7 @@ int main() {
 				break;
 
 			default:
-				cout << "Введена неизвестная команда, повторите попытку\n";
+				cout << "Р’РІРµРґРµРЅР° РЅРµРёР·РІРµСЃС‚РЅР°СЏ РєРѕРјР°РЅРґР°, РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ\n";
 				break;
 		}
 	} while (end == true);
